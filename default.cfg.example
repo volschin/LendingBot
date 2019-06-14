@@ -124,7 +124,7 @@ frrdelta = 0.0000
 #outputCurrency = BTC
 
 #Plugins allow extending Bot functionality with extra features.
-#plugins = AccountStats,Charts
+#plugins = AccountStats,Charts,Rates
 
 #[ACCOUNTSTATS]
 #ReportInterval = 86400
@@ -132,6 +132,10 @@ frrdelta = 0.0000
 #[CHARTS]
 #DumpInterval = 21600
 #HistoryFile = www/history.json
+
+[RATES]
+Currencies = BTC,ETH
+KeepDays = 10
 
 # Currencies can be configured here.
 #[BTC]
