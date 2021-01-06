@@ -1,4 +1,4 @@
-FROM python:2.7-slim
+FROM amancevice/pandas:slim
 LABEL "project.home"="https://github.com/BitBotFactory/poloniexlendingbot"
 
 #
