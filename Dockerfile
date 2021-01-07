@@ -16,7 +16,8 @@ COPY . .
 VOLUME /data
 
 RUN ln -s /data/market_data market_data; \
-    ln -s /data/log/botlog.json www/botlog.json
+    ln -s /data/log/botlog.json www/botlog.json; \
+    ln -s /data/history.json www/history.json
 
 EXPOSE 8000
 
