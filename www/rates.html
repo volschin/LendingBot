@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+    <title>Lending Bot - Profit Charts</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery Version 1.12.2 -->
+    <script src="https://code.jquery.com/jquery-1.12.2.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        $.getJSON("rates.json", function(jsonHistory) {
+
+          // loop over each coin and make the data array for each chart
+          $.each(jsonHistory, function(coin, coinData) {
+              var daysData = new google.visualization.DataTable();
+              daysData.addColumn('date', 'Time');
+              days = {};
+              column_index = 0;
+              $.each(coinData, function(i, j) {
+                  var date = new Date(j[0]*1000);
+
+                  if (!(date.getDate() in days)) {
+                      days[date.getDate()] = [];
+                      daysData.addColumn('number', date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate());
+                      column_index++;
+                  }
+                  _v = parseFloat(j[1]);
+                  _w = parseFloat(j[2]);
+
+                  daysData.addRows(2);
+                  daysData.setValue(i, 0, new Date((date.getHours() * 60 + date.getMinutes())*60 *1000));
+                  daysData.setValue(i, column_index, _w);
+              });
+
+              var options = {
+                  'title': coin + ' Daily Rate Offers',
+                  'vAxes': { 
+                      0: { 'title': 'Rate' }
+                  },
+                  'hAxis': {
+                    'format': 'HH:mm'
+                  },
+                  'series': [ ],
+                  'explorer': { keepInBounds: true }
+              };
+
+              var formatter = new google.visualization.DateFormat({pattern: 'HH:mm'});
+              formatter.format(daysData, 0);
+
+              var chartContainer = $('#chart-container');
+              var chartDiv = "chart_div_" + coin;
+              chartContainer.prepend('<div class="row"><div class="col-md-12"><div id="' + chartDiv + '" style="width: 100%; height: 700px"></div></div></div>');
+              var chart = new google.visualization.LineChart(document.getElementById(chartDiv));
+              chart.draw(daysData, options);
+
+          });
+
+        });
+
+      }
+    </script>
+
+</head>
+<body>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header" style="margin-left:8px">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="lendingbot.html"><img src="images/icon192.png" height="32" width="32" style="margin-top: 8px;margin-right: 8px;margin-left: -15px;vertical-align:top"></a>
+                <div style="display:inline-block">
+                    <h4 class="brand-margin" id="title">Lending Bot - Profit Charts</h4>
+                </div>
+            </div>
+            <ul class="nav navbar-nav navbar-right" id="navbar-menu">
+                <li id="charts-navbar" data-toggle="collapse" data-target=".navbar-collapse.in"><a href="lendingbot.html">Dashboard</a></li>
+            </ul>
+
+        </div>
+    </nav>
+
+    <div class="container" style="padding-top:50px" id="chart-container">
+      <div class="row">
+        <div class="col-md-12">
+          <p class="text-center small"></p>
+        </div>
+      </div>
+    </div>
+
+</body>
+</html>
