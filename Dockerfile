@@ -20,4 +20,4 @@ RUN ln -s /data/market_data market_data; \
 
 EXPOSE 8000
 
-CMD ["python", "lendingbot.py", "-cfg", "/data/conf/default.cfg"]
+CMD ["python", "lendingbot.py", "-cfg", "default.cfg"]
