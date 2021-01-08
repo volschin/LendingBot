@@ -16,7 +16,7 @@ class Rates(Plugin):
         self.gap_bottom = int(self.config.get("BOT", "gapbottom", 40))
         self.gap_top = int(self.config.get("BOT", "gaptop", 200))
         self.activeCurrencies = self.config.get_all_currencies()
-        self.currencies = self.config.get("RATES", "Currencies", "BTC")
+        self.currencies = self.config.get("RATES", "Currencies", "USDT")
         self.currencies = self.currencies.split(',')
         self.keep_days = int(self.config.get("RATES", "KeepDays", 10))
 
