@@ -7,7 +7,7 @@ BITCOIN_GENESIS_BLOCK_DATE = "2009-01-03 18:15:05"
 DB_DROP = "DROP TABLE IF EXISTS history"
 DB_CREATE = "CREATE TABLE IF NOT EXISTS history(" \
             "id INTEGER NOT NULL, open TIMESTAMP, close TIMESTAMP," \
-            " duration NUMBER, interest NUMBER, rate NUMBER, rate3 NUMBER," \
+            " duration NUMBER, interest NUMBER, rate NUMBER," \
             " currency TEXT NOT NULL, amount NUMBER, earned NUMBER, fee NUMBER," \
             " UNIQUE(id, currency) ON CONFLICT REPLACE )"
 DB_INSERT = "INSERT OR REPLACE INTO 'history'" \
