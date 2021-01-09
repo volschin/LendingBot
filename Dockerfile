@@ -13,6 +13,7 @@ ENV TERM xterm
 RUN apt-get update \
   && apt-get install -qqy --no-install-recommends apt-utils \
   apt-transport-https \
+  curl \
   sqlite3 \
   && apt-get upgrade -qqy \
   && apt-get autoremove -y && apt-get clean \
