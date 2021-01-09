@@ -318,6 +318,8 @@ def construct_order_book(active_cur):
 
 
 def get_gap_rate(active_cur, gap, order_book, cur_total_balance, raw=False):
+    # min daily rate can be changed per currency
+    cur_min_daily_rate = get_min_daily_rate(active_cur)
     if raw:
         gap_expected = gap
     else:
@@ -332,9 +334,10 @@ def get_gap_rate(active_cur, gap, order_book, cur_total_balance, raw=False):
             raise StopIteration
         elif i == len(order_book['volumes']) - 1:
             return max_daily_rate
-        gap_sum += float(order_book['volumes'][i])
+        if Decimal(order_book['rates'][i]) < Decimal(cur_min_daily_rate): # Only add the sum if rate is higher than the min, optimizes spreadlend experience
+            gap_sum += float(order_book['volumes'][i])
         i += 1
-    return Decimal(order_book['rates'][i])
+    return Decimal(order_book['rates'][i-1]) # order i can be a large amount and we want to place before and not after, so we have to increment
 
 
 def get_cur_spread(spread, cur_active_bal, active_cur):
