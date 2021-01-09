@@ -15,7 +15,7 @@ Join the discussion at:
 
 [<img src='https://cdn.worldvectorlogo.com/logos/slack.svg' width='90'>](https://poloniexbot.slack.com/shared_invite/MTc5OTU4MDAzNTY4LTE0OTQzMTA2MzYtZDdkYTg1NjBkYg) **- Recommended for communicating with Devs**
 
-[<img src='https://img.shields.io/reddit/subreddit-subscribers/poloniexlendingbot?style=social'>] **- Recommended for focused discussion**
+[<img src='https://img.shields.io/reddit/subreddit-subscribers/poloniexlendingbot?style=social'>](https://www.reddit.com/r/poloniexlendingbot/) **- Recommended for focused discussion**
 
 We also have a public [FAQ on the Github Wiki](https://github.com/BitBotFactory/MikaLendingBot/wiki/FAQ-(Troubleshooting)), feel free to add your questions or check there for support! 
 
