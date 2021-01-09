@@ -1,4 +1,6 @@
-FROM amancevice/pandas:0.23.4-python2-slim
+FROM python:2.7-slim
+ARG PANDAS_VERSION=0.23.4
+#FROM amancevice/pandas:0.23.4-python2-slim
 LABEL "project.home"="https://github.com/volschin/LendingBot"
 
 #
@@ -19,7 +21,8 @@ RUN apt-get update \
 WORKDIR /usr/src/app
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r ./requirements.txt
+RUN pip install --no-cache-dir pandas==${PANDAS_VERSION} \
+  && pip install --no-cache-dir -r ./requirements.txt
 
 COPY . .
 
@@ -31,5 +34,5 @@ RUN ln -s /data/market_data market_data; \
     ln -s /data/rates.json www/rates.json
 
 EXPOSE 8000
-
+HEALTHCHECK CMD ["curl", "-f", "http://localhost:8000/"]
 CMD ["python", "lendingbot.py", "-cfg", "default.cfg"]
