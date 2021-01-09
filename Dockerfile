@@ -15,14 +15,15 @@ RUN apt-get update \
   apt-transport-https \
   curl \
   sqlite3 \
-  && apt-get upgrade -qqy \
+  && apt-get upgrade -qy \
   && apt-get autoremove -y && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 WORKDIR /usr/src/app
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir pandas==${PANDAS_VERSION} \
+RUN pip install --no-cache-dir --upgrade pip \
+  && pip install --no-cache-dir pandas==${PANDAS_VERSION} \
   && pip install --no-cache-dir -r ./requirements.txt
 
 COPY . .
