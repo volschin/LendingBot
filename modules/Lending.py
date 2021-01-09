@@ -456,7 +456,7 @@ def lend_cur(active_cur, total_lent, lending_balances, ticker):
                     .format(active_cur, (cur_min_daily_rate * 100), (orders['rates'][i] * 100)))
             return 0
         elif below_min:
-            rate = str(cur_min_daily_rate)
+            rate = str(cur_min_daily_rate - Decimal(orders['rates'][0]) + Decimal(orders['rates'][i]))
         else:
             rate = orders['rates'][i]
 
