@@ -41,6 +41,7 @@ scheduler = None
 exchange = None
 frrasmin = False
 frrdelta = 0.0
+ma_debug_log = False
 
 # limit of orders to request
 loanOrdersRequestLimit = {}
@@ -336,7 +337,8 @@ def get_gap_rate(active_cur, gap, order_book, cur_total_balance, raw=False):
             return max_daily_rate
         if Decimal(order_book['rates'][i]) > cur_min_daily_rate: # Only add the sum if rate is higher than the min, optimizes spreadlend experience
             gap_sum += float(order_book['volumes'][i])
-        log.log("Checking ({0}) rate {1}% for gap_sum {2} {3}".format(i, Decimal(order_book['rates'][i]) * 100, gap_sum, active_cur))
+        if ma_debug_log:
+            log.log("Checking ({0}) rate {1}% for gap_sum {2} {3}".format(i, Decimal(order_book['rates'][i]) * 100, gap_sum, active_cur))
         i += 1
     return Decimal(order_book['rates'][i-1]) # order i can be a large amount and we want to place before and not after, so we have to increment
 
