@@ -1,5 +1,5 @@
 # Lending Bot <img src="www/images/icon192.png" width="50">
-
+![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/volschin/lending-bot) ![Docker Pulls](https://img.shields.io/docker/pulls/volschin/lending-bot)
 ## Devs are Out of Office - Community Pull Requests will be considered
 
 Lending Bot is written in Python and features automatic lending on exchanges Poloniex and Bitfinex.
