@@ -14,6 +14,7 @@ RUN apt-get update \
   && apt-get install -qqy --no-install-recommends apt-utils \
   apt-transport-https \
   curl \
+  nano \
   sqlite3 \
   && apt-get upgrade -qy \
   && apt-get autoremove -y && apt-get clean \
