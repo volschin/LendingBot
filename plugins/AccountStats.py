@@ -186,4 +186,4 @@ class AccountStats(Plugin):
 
     @staticmethod
     def format_value(value):
-        return '{0:0.12f}'.format(float(value)).rstrip('0').rstrip('.')
+        return '{0:0.4f}'.format(float(value)).rstrip('0').rstrip('.')
