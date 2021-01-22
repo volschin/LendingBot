@@ -95,9 +95,10 @@ class AccountStats(Plugin):
         return self.db.execute("PRAGMA user_version").fetchone()[0]
 
     def fetch_history(self, first_time_stamp, last_time_stamp):
-        # history 10 days backward to deal with the fact that poloniex select the start date and not the close date
-        first_time_stamp = first_time_stamp - 864000 
-        history = self.api.return_lending_history(first_time_stamp, last_time_stamp - 1, 5000)
+        # history 60 days backward to deal with the fact that poloniex select the start date and not the close date,
+        # but with the last 100 lines only that are correctly sorted with the newest close first
+        first_time_stamp = first_time_stamp - 5184000 
+        history = self.api.return_lending_history(first_time_stamp, last_time_stamp - 1, 100)
         loans = []
         for loan in history:
             loans.append(
