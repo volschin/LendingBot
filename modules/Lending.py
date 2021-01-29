@@ -363,7 +363,7 @@ def construct_orders(cur, cur_active_bal, cur_total_balance, ticker):
     order_rates = []
     i = 0
     while i < cur_spread:
-        new_rate = round(bottom_rate + (rate_step * i), 4)
+        new_rate = round(bottom_rate + (rate_step * i), 6)
         order_rates.append(new_rate)
         i += 1
     # Condensing and logic'ing time
