@@ -6,10 +6,10 @@ import json
 import sys
 import time
 
-import ConsoleUtils
+import modules.ConsoleUtils as ConsoleUtils
 import modules.Configuration as Config
-from RingBuffer import RingBuffer
-from Notify import send_notification
+from modules.RingBuffer import RingBuffer
+from modules.Notify import send_notification
 
 
 class ConsoleOutput(object):
