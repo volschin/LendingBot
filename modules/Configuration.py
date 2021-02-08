@@ -1,12 +1,12 @@
 # coding=utf-8
 import json
 import os
-from ConfigParser import SafeConfigParser
+from configparser import ConfigParser
 from decimal import Decimal
 
-config = SafeConfigParser()
+config = ConfigParser()
 Data = None
-# This module is the middleman between the bot and a SafeConfigParser object, so that we can add extra functionality
+# This module is the middleman between the bot and a ConfigParser object, so that we can add extra functionality
 # without clogging up lendingbot.py with all the config logic. For example, added a default value to get().
 
 
