@@ -22,7 +22,7 @@ start_time = time.time()
 def multiple_api_queries(n):
     try:
         for i in xrange(n):
-            print 'Thread ' + str(i + 1)
+            print(f'Thread {str(i + 1)}')
             thread1 = threading.Thread(target=call_get_open_loan_offers, args=[(i+1)])
             thread1.start()
     except Exception as e:
@@ -36,7 +36,7 @@ def test_multiple_calls():
 
 def call_get_open_loan_offers(i):
     api.return_open_loan_offers()
-    print 'API Call ' + str(i) + ' sec:' + str(time.time() - start_time)
+    print('API Call {str(i)} sec: {str(time.time() - start_time)}')
 
 
 # def api_rate_limit(n, start):
