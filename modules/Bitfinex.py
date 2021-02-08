@@ -6,6 +6,7 @@ import json
 import requests
 import time
 import threading
+import sys
 
 from modules.ExchangeApi import ExchangeApi
 from modules.ExchangeApi import ApiError
@@ -94,9 +95,8 @@ class Bitfinex(ExchangeApi):
             return r.json()
 
         except Exception as ex:
-            ex.message = ex.message if ex.message else str(ex)
-            ex.message = "{0} Requesting {1}".format(ex.message, self.url + request)
-            raise ex
+            tt, vv, tb = sys.exc_info()
+            raise RuntimeError(f'{str(ex)} - Requesting {self.url + request}')
 
     @ExchangeApi.synchronized
     def _post(self, command, payload=None, verify=True):
