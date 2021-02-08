@@ -5,7 +5,6 @@ import json
 import socket
 import time
 import urllib
-import urllib2
 import threading
 import modules.Configuration as Config
 
@@ -71,14 +70,14 @@ class Poloniex(ExchangeApi):
 
         try:
             if command == "returnTicker" or command == "return24hVolume":
-                ret = urllib2.urlopen(urllib2.Request('https://poloniex.com/public?command=' + command))
+                ret = urllib.urlopen(urllib.Request('https://poloniex.com/public?command=' + command))
                 return _read_response(ret)
             elif command == "returnOrderBook":
-                ret = urllib2.urlopen(urllib2.Request(
+                ret = urllib.urlopen(urllib.Request(
                     'https://poloniex.com/public?command=' + command + '&currencyPair=' + str(req['currencyPair'])))
                 return _read_response(ret)
             elif command == "returnMarketTradeHistory":
-                ret = urllib2.urlopen(urllib2.Request(
+                ret = urllib.urlopen(urllib.Request(
                     'https://poloniex.com/public?command=' + "returnTradeHistory" + '&currencyPair=' + str(
                         req['currencyPair'])))
                 return _read_response(ret)
@@ -87,7 +86,7 @@ class Poloniex(ExchangeApi):
                            + '&currency=' + str(req['currency']))
                 if req['limit'] > 0:
                     req_url += ('&limit=' + str(req['limit']))
-                ret = urllib2.urlopen(urllib2.Request(req_url))
+                ret = urllib.urlopen(urllib.Request(req_url))
                 return _read_response(ret)
             else:
                 req['command'] = command
@@ -100,14 +99,14 @@ class Poloniex(ExchangeApi):
                     'Key': self.APIKey
                 }
 
-                ret = urllib2.urlopen(urllib2.Request('https://poloniex.com/tradingApi', post_data, headers))
+                ret = urllib.urlopen(urllib.Request('https://poloniex.com/tradingApi', post_data, headers))
                 json_ret = _read_response(ret)
                 return post_process(json_ret)
 
             # Check in case something has gone wrong and the timer is too big
             self.reset_request_timer()
 
-        except urllib2.HTTPError as ex:
+        except urllib.HTTPError as ex:
             raw_polo_response = ex.read()
             try:
                 data = json.loads(raw_polo_response)
