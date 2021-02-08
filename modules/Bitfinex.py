@@ -30,7 +30,7 @@ class Bitfinex(ExchangeApi):
         self.symbols = []
         self.ticker = {}
         self.tickerTime = 0
-	self.baseCurrencies = ['USD', 'BTC', 'ETH']
+        self.baseCurrencies = ['USD', 'BTC', 'ETH']
         self.all_currencies = self.cfg.get_all_currencies()
         self.usedCurrencies = []
         self.timeout = int(self.cfg.get("BOT", "timeout", 30, 1, 180))
@@ -279,10 +279,9 @@ class Bitfinex(ExchangeApi):
                     usd_min = 50
                     cur_min = usd_min
                     if currency != 'USD':
-			if currency == 'EUR':
+                        if currency == 'EUR':
                             cur_min = usd_min / float(self.return_ticker()['USD_' + 'BTC']['lowestAsk']) * float(self.return_ticker()['EUR_' + 'BTC']['lowestAsk'])
-                        cur_min = usd_min / float(self.return_ticker()['USD_' + currency]['lowestAsk'])
-
+                            cur_min = usd_min / float(self.return_ticker()['USD_' + currency]['lowestAsk'])
                     raise Exception("Error create_loan_offer: Amount must be at least " + str(cur_min) + " " + currency)
                 else:
                     raise e
