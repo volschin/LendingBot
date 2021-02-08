@@ -110,7 +110,7 @@ class Logger(object):
         log_message = "{0} Error {1}".format(self.timestamp(), msg)
         self.output.printline(log_message)
         if isinstance(self.output, JsonOutput):
-            print log_message
+            print(log_message)
         self.refreshStatus()
 
     def offer(self, amt, cur, rate, days, msg):
