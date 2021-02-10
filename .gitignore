@@ -9,5 +9,5 @@ error.log
 *.sqlite3
 *.db*
 docs/_build/
-
 venv/
+.hypothesis
