@@ -1,4 +1,5 @@
 # coding=utf-8
+import sys
 import hashlib
 import hmac
 import json
@@ -6,8 +7,9 @@ import socket
 import time
 import urllib
 import threading
-import modules.Configuration as Config
+from urllib.error import HTTPError
 
+import modules.Configuration as Config
 from modules.RingBuffer import RingBuffer
 from modules.ExchangeApi import ExchangeApi
 from modules.ExchangeApi import ApiError
@@ -116,7 +118,7 @@ class Poloniex(ExchangeApi):
             # Check in case something has gone wrong and the timer is too big
             self.reset_request_timer()
 
-        except urllib.HTTPError as ex:
+        except HTTPError as ex:
             raw_polo_response = ex.read()
             try:
                 data = json.loads(raw_polo_response)
@@ -131,14 +133,13 @@ class Poloniex(ExchangeApi):
                     self.increase_request_timer()
                 else:
                     polo_error_msg = raw_polo_response
-            ex.message = ex.message if ex.message else str(ex)
-            ex.message = "{0} Requesting {1}.  Poloniex reports: '{2}'".format(
-                ex.message, command, polo_error_msg)
-            raise ex
+            tt, vv, tb = sys.exc_info()
+            raise RuntimeError(f'{str(ex)} - requesting {command} - Poloniex reports {polo_error_msg}')
+
+              
         except Exception as ex:
-            ex.message = ex.message if ex.message else str(ex)
-            ex.message = "{0} Requesting {1}".format(ex.message, command)
-            raise
+            tt, vv, tb = sys.exc_info()
+            raise RuntimeError(f'{str(ex)} - Requesting {self.url + request}')
 
     def return_ticker(self):
         return self.api_query("returnTicker")
