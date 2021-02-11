@@ -91,7 +91,7 @@ class Poloniex(ExchangeApi):
             else:
                 req['command'] = command
                 req['nonce'] = int(time.time() * 1000)
-                post_data = urllib.urlencode(req)
+                post_data = urllib.parse.urlencode(req)
 
                 sign = hmac.new(self.Secret, post_data, hashlib.sha512).hexdigest()
                 headers = {

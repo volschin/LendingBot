@@ -21,7 +21,7 @@ def init(file_location, data=None):
             shutil.copy('default.cfg.example', file_location)
             print('\ndefault.cfg.example has been copied to ' + file_location + '\n' \
                   'Edit it with your API key and custom settings.\n')
-            raw_input("Press Enter to acknowledge and exit...")
+            input("Press Enter to acknowledge and exit...")
             exit(1)
         except Exception as ex:
             ex.message = ex.message if ex.message else str(ex)
