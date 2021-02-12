@@ -410,11 +410,7 @@ def get_gap_mode_rates(cur, cur_active_bal, cur_total_balance, ticker):
         top_rate = get_gap_rate(cur, gap_top, order_book, cur_total_balance)
     else:
         if use_gap_cfg:
-<<<<<<< HEAD
-            print("WARN: Invalid setting for gapMode for [%s], using defaults..." % cur)
-=======
             print(f'WARN: Invalid setting for gapMode for {cur}, using defaults...')
->>>>>>> 9f76fa85e9b314c1de8fd36e28ef328b90a2c6c2
             coin_cfg[cur]['gapmode'] = "rawbtc"
             coin_cfg[cur]['gapbottom'] = 10
             coin_cfg[cur]['gaptop'] = 100
