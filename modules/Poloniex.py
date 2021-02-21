@@ -76,20 +76,19 @@ class Poloniex(ExchangeApi):
         try:
             if command == "returnTicker" or command == "return24hVolume":
                 ret = urllib.request.urlopen(
-                    urllib.Request('https://poloniex.com/public?command=' +
-                                   command))
+                    f'https://poloniex.com/public?command={command}')
                 return _read_response(ret)
             elif command == "returnOrderBook":
                 ret = urllib.request.urlopen(
-                    urllib.Request('https://poloniex.com/public?command=' +
-                                   command + '&currencyPair=' +
-                                   str(req['currencyPair'])))
+                         'https://poloniex.com/public?command=' +
+                         command + '&currencyPair=' +
+                         str(req['currencyPair']))
                 return _read_response(ret)
             elif command == "returnMarketTradeHistory":
                 ret = urllib.request.urlopen(
-                    urllib.Request('https://poloniex.com/public?command=' +
-                                   "returnTradeHistory" + '&currencyPair=' +
-                                   str(req['currencyPair'])))
+                          'https://poloniex.com/public?command=' +
+                          "returnTradeHistory" + '&currencyPair=' +
+                          str(req['currencyPair']))
                 return _read_response(ret)
             elif command == "returnLoanOrders":
                 req_url = ('https://poloniex.com/public?command=' +
@@ -97,7 +96,7 @@ class Poloniex(ExchangeApi):
                            str(req['currency']))
                 if req['limit'] > 0:
                     req_url += ('&limit=' + str(req['limit']))
-                ret = urllib.request.urlopen(urllib.Request(req_url))
+                ret = urllib.request.urlopen(req_url)
                 return _read_response(ret)
             else:
                 req['command'] = command
@@ -139,7 +138,7 @@ class Poloniex(ExchangeApi):
               
         except Exception as ex:
             tt, vv, tb = sys.exc_info()
-            raise RuntimeError(f'{str(ex)} - Requesting {self.url + request}')
+            raise RuntimeError(f'{str(ex)} - Requesting {request}')
 
     def return_ticker(self):
         return self.api_query("returnTicker")
