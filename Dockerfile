@@ -1,4 +1,5 @@
-FROM python:2.7-slim
+FROM volschin/python2-slim:latest
+#FROM python:2.7-slim
 ARG PANDAS_VERSION=0.23.4
 #FROM amancevice/pandas:0.23.4-python2-slim
 LABEL "project.home"="https://github.com/volschin/LendingBot"
