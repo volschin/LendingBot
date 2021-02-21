@@ -17,7 +17,6 @@ RUN apt-get update \
   curl \
   nano \
   sqlite3 \
-  && apt-get upgrade -qy \
   && apt-get autoremove -y && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
