@@ -67,13 +67,13 @@ def init(cfg, api1, log1, data, maxtolend, dry_run1, analysis, notify_conf1):
     sleep_time_active = float(Config.get("BOT", "sleeptimeactive", None, 1, 3600))
     sleep_time_inactive = float(Config.get("BOT", "sleeptimeinactive", None, 1, 3600))
     exchangeMax = 7 if exchange == 'BITFINEX' else 5
-    min_daily_rate = Decimal(Config.get("BOT", "mindailyrate", None, 0.003, exchangeMax)) / 100
-    max_daily_rate = Decimal(Config.get("BOT", "maxdailyrate", None, 0.003, exchangeMax)) / 100
+    min_daily_rate = Decimal(Config.get("BOT", "mindailyrate", None, 0.002, exchangeMax)) / 100
+    max_daily_rate = Decimal(Config.get("BOT", "maxdailyrate", None, 0.002, exchangeMax)) / 100
     spread_lend = int(Config.get("BOT", "spreadlend", None, 1, 20))
     gap_mode_default = Config.get_gap_mode("BOT", "gapMode")
     gap_bottom_default = Decimal(Config.get("BOT", "gapbottom", None, 0))
     gap_top_default = Decimal(Config.get("BOT", "gaptop", None, gap_bottom_default))
-    xday_threshold = float(Config.get("BOT", "xdaythreshold", None, 0.003, 5)) / 100
+    xday_threshold = float(Config.get("BOT", "xdaythreshold", None, 0.002, 5)) / 100
     xday_spread = float(Config.get('BOT', 'xdayspread', 0, 0, 10))
     maxPeriod = 120 if exchange == 'BITFINEX' else 60
     xdays = str(Config.get("BOT", "xdays", None, 2, maxPeriod))
@@ -268,7 +268,7 @@ def get_frr_or_min_daily_rate(cur):
         frrasmin = coin_cfg[cur]['frrasmin']
         frrdelta = Decimal(coin_cfg[cur]['frrdelta']) / 100
     else:
-        min_daily_rate = Decimal(Config.get("BOT", "mindailyrate", None, 0.003, 5)) / 100
+        min_daily_rate = Decimal(Config.get("BOT", "mindailyrate", None, 0.002, 5)) / 100
         frrasmin = Config.getboolean('BOT', 'frrasmin', False)
         frrdelta = Decimal(Config.get('BOT', 'frrdelta', 0.0000))
 
