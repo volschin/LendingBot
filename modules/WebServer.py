@@ -44,8 +44,8 @@ def start_web_server():
     '''
     Start the web server
     '''
-    import SimpleHTTPServer
-    import SocketServer
+    import http.server as SimpleHTTPServer
+    import socketserver as SocketServer
     import socket
 
     try:
