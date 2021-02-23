@@ -61,8 +61,7 @@ class JsonOutput(object):
     def writeJsonFile(self):
         with io.open(self.jsonOutputFile, 'w', encoding='utf-8') as f:
             self.jsonOutput["log"] = self.jsonOutputLog.get()
-            f.write(unicode(json.dumps(self.jsonOutput, ensure_ascii=True, sort_keys=True), errors='replace'))
-            f.close()
+            f.write(json.dumps(self.jsonOutput, ensure_ascii=True, sort_keys=True))
 
     def addSectionLog(self, section, key, value):
         if section not in self.jsonOutput:
