@@ -1,6 +1,5 @@
 # coding=utf-8
 import urllib
-import urllib2
 import json
 import smtplib
 try:
@@ -41,9 +40,9 @@ def check_urlib_response(response, platform):
 def post_to_slack(msg, channels, token, username):
     for channel in channels:
         post_data = {'text': msg, 'channel': channel, 'token': token, 'username': username}
-        enc_post_data = urllib.urlencode(encoded_dict(post_data))
+        enc_post_data = urllib.parse.urlencode(encoded_dict(post_data))
         url = 'https://{}/api/{}'.format('slack.com', 'chat.postMessage')
-        response = urllib2.urlopen(url, enc_post_data)
+        response = urllib.urlopen(url, enc_post_data)
         check_urlib_response(response, 'slack')
 
 
@@ -52,9 +51,9 @@ def post_to_telegram(msg, chat_ids, bot_id):
         post_data = {"chat_id": chat_id, "text": msg}
         url = "https://api.telegram.org/bot" + bot_id + "/sendMessage"
         try:
-            response = urllib2.urlopen(url, urllib.urlencode(post_data))
+            response = urllib.urlopen(url, urllib.parse.urlencode(post_data))
             check_urlib_response(response, 'telegram')
-        except urllib2.HTTPError as e:
+        except urllib.HTTPError as e:
             msg = "Your bot id is probably configured incorrectly"
             raise NotificationException("{0}\n{1}".format(e, msg))
 

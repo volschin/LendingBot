@@ -1,6 +1,6 @@
 from hypothesis import given, settings
 from hypothesis.strategies import floats, lists, integers
-from hypothesis.extra.datetime import datetimes
+# from hypothesis.extra.datetime import datetimes
 
 import csv
 import datetime
@@ -103,7 +103,7 @@ def test_get_rate_suggestion(populated_db):
 
     df = pd.DataFrame(rates)
     df.columns = ['rate0', 'a0', 'r1', 'a1', 'r2', 'a2', 'p']
-    df.time = [time.time()] * len(df)
+    df['time'] = time.time()  # No need to -> [time.time()] * len(df)
     rate_args = MA.get_rate_suggestion(db_con, df, 'percentile')
     assert(rate_args >= 0)
 

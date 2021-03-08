@@ -6,10 +6,10 @@ import json
 import sys
 import time
 
-import ConsoleUtils
+import modules.ConsoleUtils as ConsoleUtils
 import modules.Configuration as Config
-from RingBuffer import RingBuffer
-from Notify import send_notification
+from modules.RingBuffer import RingBuffer
+from modules.Notify import send_notification
 
 
 class ConsoleOutput(object):
@@ -61,8 +61,7 @@ class JsonOutput(object):
     def writeJsonFile(self):
         with io.open(self.jsonOutputFile, 'w', encoding='utf-8') as f:
             self.jsonOutput["log"] = self.jsonOutputLog.get()
-            f.write(unicode(json.dumps(self.jsonOutput, ensure_ascii=True, sort_keys=True), errors='replace'))
-            f.close()
+            f.write(json.dumps(self.jsonOutput, ensure_ascii=True, sort_keys=True))
 
     def addSectionLog(self, section, key, value):
         if section not in self.jsonOutput:
@@ -110,7 +109,7 @@ class Logger(object):
         log_message = "{0} Error {1}".format(self.timestamp(), msg)
         self.output.printline(log_message)
         if isinstance(self.output, JsonOutput):
-            print log_message
+            print(log_message)
         self.refreshStatus()
 
     def offer(self, amt, cur, rate, days, msg):

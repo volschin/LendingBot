@@ -1,7 +1,8 @@
 import datetime
 from decimal import Decimal
-from urllib import urlopen
+from urllib.request import urlopen
 import json
+
 
 api = None
 log = None
@@ -45,9 +46,9 @@ def get_total_lent():
     total_lent = {}
     rate_lent = {}
     for item in crypto_lent["provided"]:
-        item_str = item["amount"].encode("utf-8")
+        item_str = item["amount"] # .encode("utf-8")
         item_float = Decimal(item_str)
-        item_rate_str = item["rate"].encode("utf-8")
+        item_rate_str = item["rate"] # .encode("utf-8")
         item_rate_float = Decimal(item_rate_str)
         if item["currency"] in total_lent:
             crypto_lent_sum = total_lent[item["currency"]] + item_float

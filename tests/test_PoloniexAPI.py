@@ -36,13 +36,13 @@ def api_rate_limit(n, start):
     api.limit_request_rate()
     # verify that the (N % 6) th request is delayed by (N / 6) sec from the start time
     if n != 0 and n % 6 == 0:
-        print 'limit request ' + str(n) + ' ' + str(start) + ' ' + str(time.time()) + '\n'
+        print(f'limit request {str(n)} {str(start)} {str(time.time())}\n')
         assert time.time() - start >= int(n / 6), "rate limit failed"
 
 
 # Test rate limiter
 def test_rate_limiter():
     start = time.time()
-    for i in xrange(20):
+    for i in range(20):
         thread1 = threading.Thread(target=api_rate_limit, args=(i, start))
         thread1.start()

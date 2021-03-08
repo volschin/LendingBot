@@ -5,9 +5,10 @@ import sys
 import time
 import traceback
 import socket
+import logging
 from decimal import Decimal
-from httplib import BadStatusLine
-from urllib2 import URLError
+from http.client import BadStatusLine
+from urllib.error import URLError
 
 import modules.Configuration as Config
 import modules.Data as Data
@@ -101,7 +102,7 @@ def new_getaddrinfo(*urlargs):
 
 socket.getaddrinfo = new_getaddrinfo
 
-print 'Welcome to ' + Config.get("BOT", "label", "Lending Bot") + ' on ' + exchange
+print('Welcome to ' + Config.get("BOT", "label", "Lending Bot") + ' on ' + exchange)
 
 try:
     while True:
@@ -122,28 +123,28 @@ try:
             # allow existing the main bot loop
             raise
         except Exception as ex:
-            log.log_error(ex.message)
-            log.persistStatus()
-            if 'Invalid API key' in ex.message:
-                print "!!! Troubleshooting !!!"
-                print "Are your API keys correct? No quotation. Just plain keys."
+            logging.error(ex)
+            # log.persistStatus()
+            if 'Invalid API key' in str(ex):
+                print( "!!! Troubleshooting !!!")
+                print("Are your API keys correct? No quotation. Just plain keys.")
                 exit(1)
-            elif 'Nonce must be greater' in ex.message:
-                print "!!! Troubleshooting !!!"
-                print "Are you reusing the API key in multiple applications? Use a unique key for every application."
+            elif 'Nonce must be greater' in str(ex):
+                print( "!!! Troubleshooting !!!")
+                print("Are you reusing the API key in multiple applications? Use a unique key for every application.")
                 exit(1)
-            elif 'Permission denied' in ex.message:
-                print "!!! Troubleshooting !!!"
-                print "Are you using IP filter on the key? Maybe your IP changed?"
+            elif 'Permission denied' in str(ex):
+                print("!!! Troubleshooting !!!")
+                print("Are you using IP filter on the key? Maybe your IP changed?")
                 exit(1)
-            elif 'timed out' in ex.message:
-                print "Timed out, will retry in " + str(Lending.get_sleep_time()) + "sec"
+            elif 'timed out' in str(ex):
+                print("Timed out, will retry in " + str(Lending.get_sleep_time()) + "sec")
             elif isinstance(ex, BadStatusLine):
-                print "Caught BadStatusLine exception from Poloniex, ignoring."
-            elif 'Error 429' in ex.message:
+                print("Caught BadStatusLine exception from Poloniex, ignoring.")
+            elif 'Error 429' in str(ex):
                 additional_sleep = max(130.0-Lending.get_sleep_time(), 0)
                 sum_sleep = additional_sleep + Lending.get_sleep_time()
-                log.log_error('IP has been banned due to many requests. Sleeping for {} seconds'.format(sum_sleep))
+                logging.error('IP has been banned due to many requests. Sleeping for {} seconds'.format(sum_sleep))
                 if Config.has_option('MarketAnalysis', 'analyseCurrencies'):
                     if api.req_period <= api.default_req_period * 1.5:
                         api.req_period += 1000
@@ -154,12 +155,12 @@ try:
                 time.sleep(additional_sleep)
             # Ignore all 5xx errors (server error) as we can't do anything about it (https://httpstatuses.com/)
             elif isinstance(ex, URLError):
-                print "Caught {0} from exchange, ignoring.".format(ex.message)
+                print("Caught {0} from exchange, ignoring.".format(ex.message))
             elif isinstance(ex, ApiError):
-                print "Caught {0} reading from exchange API, ignoring.".format(ex.message)
+                print("Caught {0} reading from exchange API, ignoring.".format(ex.message))
             else:
-                print traceback.format_exc()
-                print "v{0} Unhandled error, please open a Github issue so we can fix it!".format(Data.get_bot_version())
+                print(traceback.format_exc())
+                print("v{0} Unhandled error, please open a Github issue so we can fix it!".format(Data.get_bot_version()))
                 if notify_conf['notify_caught_exception']:
                     log.notify("{0}\n-------\n{1}".format(ex, traceback.format_exc()), notify_conf)
             sys.stdout.flush()
@@ -170,6 +171,6 @@ except KeyboardInterrupt:
     if web_server_enabled:
         WebServer.stop_web_server()
     PluginsManager.on_bot_exit()
-    log.log('bye')
-    print 'bye'
+    logging.debug('bye')
+    print('bye')
     os._exit(0)  # Ad-hoc solution in place of 'exit(0)' TODO: Find out why non-daemon thread(s) are hanging on exit
