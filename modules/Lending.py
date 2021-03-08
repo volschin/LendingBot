@@ -337,8 +337,9 @@ def get_gap_rate(active_cur, gap, order_book, cur_total_balance, raw=False):
         gap_sum += float(order_book['volumes'][i])
         if Decimal(order_book['rates'][i]) > cur_min_daily_rate: # Only add the sum if rate is higher than the min, optimizes spreadlend experience
             gap_sum += float(order_book['volumes'][i])
-        log.log("Checking ({0}) rate {1}% for gap_sum {2} {3}".format(i, Decimal(order_book['rates'][i]) * 100, gap_sum, active_cur))
+#        log.log("Checking ({0}) rate {1}% for gap_sum {2} {3}".format(i, Decimal(order_book['rates'][i]) * 100, gap_sum, active_cur))
         i += 1
+    log.log("Checked ({0}) rate {1}% for gap_sum {2} {3}".format(i-1, Decimal(order_book['rates'][i-1]) * 100, gap_sum, active_cur))
     return Decimal(order_book['rates'][i-1]) # order i can be a large amount and we want to place before and not after, so we have to increment
 
 
