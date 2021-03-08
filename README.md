@@ -12,11 +12,11 @@ Join the discussion at:
 
 [![Join the chat at https://gitter.im/Mikadily/poloniexlendingbot](https://badges.gitter.im/Mikadily/poloniexlendingbot.svg)](https://gitter.im/Mikadily/poloniexlendingbot?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-[<img src='img.shields.io/badge/Chat%20on-Telegram-brightgreen.svg' width='100'>](https://t.me/mikalendingbot)
+[<img src='https://img.shields.io/badge/Chat%20on-Telegram-brightgreen.svg' width='100'>](https://t.me/mikalendingbot)
 
 [<img src='https://cdn.worldvectorlogo.com/logos/slack.svg' width='90'>](https://poloniexbot.slack.com/shared_invite/MTc5OTU4MDAzNTY4LTE0OTQzMTA2MzYtZDdkYTg1NjBkYg) **- Recommended for communicating with Devs**
 
-[<img src='img.shields.io/reddit/subreddit-subscribers/poloniexlendingbot?style=social'>](https://www.reddit.com/r/poloniexlendingbot/) **- Recommended for focused discussion**
+[<img src='https://img.shields.io/reddit/subreddit-subscribers/poloniexlendingbot?style=social'>](https://www.reddit.com/r/poloniexlendingbot/) **- Recommended for focused discussion**
 
 We also have a public [FAQ on the Github Wiki](https://github.com/BitBotFactory/MikaLendingBot/wiki/FAQ-(Troubleshooting)), feel free to add your questions or check there for support! 
 
