@@ -1,5 +1,5 @@
-FROM python:3.7-slim
-LABEL "project.home"="https://github.com/BitBotFactory/poloniexlendingbot"
+FROM python:3.8-slim
+LABEL "project.home"="https://github.com/volschin/LendingBot"
 
 #
 # Build: docker build -t <your_id>/pololendingbot .
@@ -22,5 +22,5 @@ RUN ln -s /data/market_data market_data; \
 
 EXPOSE 8000
 
-HEALTHCHECK CMD curl --fail-early -ISs http://localhost:8000/ |grep P/ || exit 1
+#HEALTHCHECK CMD curl --fail-early -ISs http://localhost:8000/ |grep P/ || exit 1
 CMD ["python", "lendingbot.py", "-cfg", "default.cfg"]
