@@ -318,6 +318,8 @@ def construct_order_book(active_cur):
 
 
 def get_gap_rate(active_cur, gap, order_book, cur_total_balance, raw=False):
+    # min daily rate can be changed per currency
+    cur_min_daily_rate = get_min_daily_rate(active_cur)
     if raw:
         gap_expected = gap
     else:
@@ -333,8 +335,12 @@ def get_gap_rate(active_cur, gap, order_book, cur_total_balance, raw=False):
         elif i == len(order_book['volumes']) - 1:
             return max_daily_rate
         gap_sum += float(order_book['volumes'][i])
+        if Decimal(order_book['rates'][i]) > cur_min_daily_rate: # Only add the sum if rate is higher than the min, optimizes spreadlend experience
+            gap_sum += float(order_book['volumes'][i])
+        if ma_debug_log:
+            log.log("Checking ({0}) rate {1}% for gap_sum {2} {3}".format(i, Decimal(order_book['rates'][i]) * 100, gap_sum, active_cur))
         i += 1
-    return Decimal(order_book['rates'][i])
+    return Decimal(order_book['rates'][i-1]) # order i can be a large amount and we want to place before and not after, so we have to increment
 
 
 def get_cur_spread(spread, cur_active_bal, active_cur):
@@ -357,7 +363,7 @@ def construct_orders(cur, cur_active_bal, cur_total_balance, ticker):
     order_rates = []
     i = 0
     while i < cur_spread:
-        new_rate = bottom_rate + (rate_step * i)
+        new_rate = round(bottom_rate + (rate_step * i), 6)
         order_rates.append(new_rate)
         i += 1
     # Condensing and logic'ing time
@@ -456,7 +462,7 @@ def lend_cur(active_cur, total_lent, lending_balances, ticker):
                     .format(active_cur, (cur_min_daily_rate * 100), (orders['rates'][i] * 100)))
             return 0
         elif below_min:
-            rate = str(cur_min_daily_rate)
+            rate = str(cur_min_daily_rate - Decimal(orders['rates'][0]) + Decimal(orders['rates'][i]))
         else:
             rate = orders['rates'][i]
 

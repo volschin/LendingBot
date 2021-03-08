@@ -10,3 +10,9 @@ error.log
 
 docs
 market_data
+Dockerfile
+docker-compose.yaml
+.dockerignore
+.git
+.gitignore
+.github

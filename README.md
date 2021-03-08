@@ -1,8 +1,9 @@
-# Mika Lending Bot <img src="https://nevet.me/public/icon.png" width="50">
+# Lending Bot <img src="www/images/icon192.png" width="50">
+![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/volschin/lending-bot) ![Docker Pulls](https://img.shields.io/docker/pulls/volschin/lending-bot)
 
 ## Devs are Out of Office - Community Pull Requests will be considered
 
-Mika Lending Bot is written in Python and features automatic lending on exchanges Poloniex and Bitfinex.
+Lending Bot is written in Python and features automatic lending on exchanges Poloniex and Bitfinex.
 It will automatically lend all cryptocurrencies found in your lending account.
 
 It uses an advanced lending strategy which will spread offers across the lend book to take advantage of possible spikes in lending rates. Inspired by [MarginBot](https://github.com/HFenter/MarginBot) and [BitfinexLendingBot](https://github.com/eAndrius/BitfinexLendingBot).
@@ -11,17 +12,13 @@ Join the discussion at:
 
 [![Join the chat at https://gitter.im/Mikadily/poloniexlendingbot](https://badges.gitter.im/Mikadily/poloniexlendingbot.svg)](https://gitter.im/Mikadily/poloniexlendingbot?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-[<img src='https://dokkur.com/assets/images/docs_screens/telegram.png' width='100'>](https://t.me/mikalendingbot)
+[<img src='img.shields.io/badge/Chat%20on-Telegram-brightgreen.svg' width='100'>](https://t.me/mikalendingbot)
 
 [<img src='https://cdn.worldvectorlogo.com/logos/slack.svg' width='90'>](https://poloniexbot.slack.com/shared_invite/MTc5OTU4MDAzNTY4LTE0OTQzMTA2MzYtZDdkYTg1NjBkYg) **- Recommended for communicating with Devs**
 
-[<img src='https://www.redditstatic.com/spreddit1.gif'>Subreddit](https://www.reddit.com/r/poloniexlendingbot/) **- Recommended for focused discussion**
+[<img src='img.shields.io/reddit/subreddit-subscribers/poloniexlendingbot?style=social'>](https://www.reddit.com/r/poloniexlendingbot/) **- Recommended for focused discussion**
 
 We also have a public [FAQ on the Github Wiki](https://github.com/BitBotFactory/MikaLendingBot/wiki/FAQ-(Troubleshooting)), feel free to add your questions or check there for support! 
-
-Workflow management with Waffle.io
-
-[![Throughput Graph](https://graphs.waffle.io/Mikadily/poloniexlendingbot/throughput.svg)](https://waffle.io/Mikadily/poloniexlendingbot/)
 
 ## Documentation
 [Click here to read the Documentation, hosted by readthedocs.io](http://poloniexlendingbot.readthedocs.io/en/latest/index.html)
