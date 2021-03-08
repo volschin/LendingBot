@@ -16,8 +16,11 @@ COPY . .
 VOLUME /data
 
 RUN ln -s /data/market_data market_data; \
-    ln -s /data/log/botlog.json www/botlog.json
+    ln -s /data/log/botlog.json www/botlog.json; \
+    ln -s /data/history.json www/history.json; \
+    ln -s /data/rates.json www/rates.json
 
 EXPOSE 8000
 
-CMD ["python", "lendingbot.py", "-cfg", "/data/conf/default.cfg"]
+HEALTHCHECK CMD curl --fail-early -ISs http://localhost:8000/ |grep P/ || exit 1
+CMD ["python", "lendingbot.py", "-cfg", "default.cfg"]
