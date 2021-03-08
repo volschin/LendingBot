@@ -33,5 +33,5 @@ RUN ln -s /data/market_data market_data; \
 
 EXPOSE 8000
 
-#HEALTHCHECK CMD curl --fail-early -ISs http://localhost:8000/ |grep P/ || exit 1
+HEALTHCHECK CMD curl --fail-early -ISs http://localhost:8000/ |grep P/ || exit 1
 CMD ["python", "lendingbot.py", "-cfg", "default.cfg"]
