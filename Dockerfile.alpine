@@ -5,7 +5,7 @@ LABEL "project.home"="https://github.com/volschin/LendingBot"
 ARG BUILD_VERSION
 ENV BUILD_VERSION=${BUILD_VERSION}
 
-RUN apk --no-cache add 
+RUN apk --no-cache add \
   tzdata \
   curl \
   nano \
