@@ -1,0 +1,31 @@
+FROM python:3-alpine
+LABEL "project.home"="https://github.com/volschin/LendingBot"
+
+# Deploy version
+ARG BUILD_VERSION
+ENV BUILD_VERSION=${BUILD_VERSION}
+
+RUN apk --no-cache add 
+  tzdata \
+  curl \
+  nano \
+  sqlite3 
+
+ENV TZ=Europe/Berlin
+
+WORKDIR /usr/src/app
+
+COPY . .
+RUN pip install --no-cache-dir -r ./requirements.txt
+
+VOLUME /data
+
+RUN ln -s /data/market_data market_data; \
+    ln -s /data/log/botlog.json www/botlog.json; \
+    ln -s /data/history.json www/history.json; \
+    ln -s /data/rates.json www/rates.json
+
+EXPOSE 8000
+
+HEALTHCHECK CMD curl --fail-early -ISs http://localhost:8000/ |grep P/ || exit 1
+ENTRYPOINT ["python", "lendingbot.py", "-cfg", "default.cfg"]
