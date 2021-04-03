@@ -1,9 +1,6 @@
-FROM python:3-alpine
+# FROM python:3-alpine
+FROM amancevice/pandas:alpine
 LABEL "project.home"="https://github.com/volschin/LendingBot"
-
-# Deploy version
-ARG BUILD_VERSION
-ENV BUILD_VERSION=${BUILD_VERSION}
 
 RUN apk --no-cache add \
   tzdata \
