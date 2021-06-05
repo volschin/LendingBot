@@ -1,4 +1,5 @@
-FROM python:3.9-slim
+FROM amancevice/pandas:slim
+#FROM python:3.9-slim
 LABEL "project.home"="https://github.com/volschin/LendingBot"
 
 #
